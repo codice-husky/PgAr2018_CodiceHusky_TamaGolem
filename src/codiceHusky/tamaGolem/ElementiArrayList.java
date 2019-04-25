@@ -12,6 +12,10 @@ public class ElementiArrayList extends ArrayList<String> {
 			this.add(elemento);
 		}
 		mappaPotenza = new Integer[TamaMain.NUMERO_ELEMENTI][TamaMain.NUMERO_ELEMENTI];
+		for(int i=0;i<TamaMain.NUMERO_ELEMENTI;i++) {
+			mappaPotenza[i][i] = 0;
+			
+		}
 	}
 	
 	
