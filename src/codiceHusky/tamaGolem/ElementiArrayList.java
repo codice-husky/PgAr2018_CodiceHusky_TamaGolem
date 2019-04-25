@@ -20,8 +20,9 @@ public class ElementiArrayList extends ArrayList<String> {
 		int indexRicevente = this.indexOf(elementoRicevente);
 		
 		mappaPotenza[indexSorgente][indexRicevente] = potenza;
+		mappaPotenza[indexRicevente][indexSorgente] = 0;
 	}
-	
+		
 	public int getPotenza(String elementoSorgente, String elementoRicevente) {
 		int indexSorgente = this.indexOf(elementoSorgente);
 		int indexRicevente = this.indexOf(elementoRicevente);
