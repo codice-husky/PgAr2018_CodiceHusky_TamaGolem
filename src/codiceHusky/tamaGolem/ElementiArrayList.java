@@ -3,7 +3,7 @@ package codiceHusky.tamaGolem;
 import java.util.ArrayList;
 
 public class ElementiArrayList extends ArrayList<String> {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4193461440714862171L;
 	private Integer[][] mappaPotenza;
 	
 	public ElementiArrayList(String[] elementi) {

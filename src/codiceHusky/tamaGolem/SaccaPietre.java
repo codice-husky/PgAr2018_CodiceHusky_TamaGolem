@@ -8,22 +8,29 @@ public class SaccaPietre extends ArrayList<String> {
 	
 	public SaccaPietre(int numPietre) {
 		super();
-		for(int i=0; i<numPietre; i++) this.add(pietraRandom());
-	}
-	/**
-	 * Sceglie un elemento random tra quelli disponibili. Un elemento può essere estratto più volte
-	 * @return Nome dell'elemento
-	 */
-	private String pietraRandom() {
-		int elemScelto = (int)Math.round(Math.random() * TamaMain.ELEMENTI_PIETRE.length);
-		return TamaMain.ELEMENTI_PIETRE[elemScelto];
+		int pietrePerElemento = calcPietrePerElemento();
+		for(String elemento : TamaMain.ELEMENTI_PIETRE) {
+			for(int i=0; i<pietrePerElemento; i++) {
+				this.add(elemento);
+			}
+		}
 	}
 	
+	
+	/**
+	 * Calcola il numero di pietre previste per ogni elemento
+	 * @return Numero pietre
+	 */
+	private int calcPietrePerElemento() {
+		int nPietre = ((TamaMain.ELEMENTI_PIETRE.length + 1) / 3) + 1;
+		int nGolem = ((TamaMain.ELEMENTI_PIETRE.length - 1) * (TamaMain.ELEMENTI_PIETRE.length - 2) / (nPietre * 2));
+		return ((2 * nGolem * nPietre) / TamaMain.ELEMENTI_PIETRE.length);
+	}
 	
 	
 	/**
 	 * Estrae una pietra dal sacco. Ciò implica che la pietra verrà rimossa dal sacco e non sarà possibile pescarla una seconda volta
-	 * @return Nome dell'elemento estratto
+	 * @return Nome dell'elemento estratto, null se il sacco è vuoto
 	 */
 	public String estraiPietra() {
 		if(this.size()>0) {
