@@ -1,4 +1,8 @@
 package codiceHusky.tamaGolem;
-public class Giocatore {
 
+import java.util.ArrayList;
+
+public class Giocatore {
+	private ArrayList<TamaGolem> tamaGolem;
+	
 }

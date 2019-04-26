@@ -1,10 +1,12 @@
 package codiceHusky.tamaGolem;
 public class TamaGolem {
 	private String[] pietre;
-	int ciclo;
+	private int vitaRimanente;
+	private int ciclo;
 	
 	public TamaGolem(int P) {
 		pietre = new String[P];
+		vitaRimanente = TamaMain.VITA_TAMAGOLEM;
 		ciclo = 0;
 	}
 	
@@ -16,5 +18,13 @@ public class TamaGolem {
 		if(ciclo == pietre.length) {
 			ciclo = 0;
 		}
+	}
+	
+	private void assegnaPietre() {
+		
+	}
+	
+	private String getPietraAttiva() {
+		return pietre[ciclo];
 	}
 }
