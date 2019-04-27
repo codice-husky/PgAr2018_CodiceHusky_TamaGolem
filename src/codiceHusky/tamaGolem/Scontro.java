@@ -12,6 +12,15 @@ public class Scontro {
 		this.g2 = g2;
 	}
 	
-	//public void scegliGolem(Giocatore g, )
+	public boolean nuovoGolem(Giocatore g, SaccaPietre sacca) {
+		TamaGolem golemEstratto = g.evocaGolem();
+		if(golemEstratto != null) {
+			g.setGolemAttivo(golemEstratto);
+			golemEstratto.assegnaPietre(sacca);
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 }

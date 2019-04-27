@@ -20,11 +20,19 @@ public class TamaGolem {
 		}
 	}
 	
-	private void assegnaPietre() {
-		
+	@SuppressWarnings("unused")
+	public void assegnaPietre(SaccaPietre sacca) {
+		for(String pietra : pietre) {
+			pietra = sacca.estraiPietra();
+		}
 	}
+	
 	
 	private String getPietraAttiva() {
 		return pietre[ciclo];
+	}
+
+	public int getVitaRimanente() {
+		return vitaRimanente;
 	}
 }

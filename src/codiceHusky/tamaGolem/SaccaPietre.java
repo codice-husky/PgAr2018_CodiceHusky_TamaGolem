@@ -6,7 +6,7 @@ public class SaccaPietre extends ArrayList<String> {
 	private static final long serialVersionUID = 6668925229983915099L;
 	
 	
-	public SaccaPietre(int numPietre) {
+	public SaccaPietre() {
 		super();
 		int pietrePerElemento = calcPietrePerElemento();
 		for(String elemento : TamaMain.ELEMENTI_PIETRE) {
