@@ -45,5 +45,25 @@ public class TamaMain {
 		}
 		
 	}
+	
+	/**
+	 * Permette la scelta delle pietre di un golem
+	 * @param golem TamGolem al quale assegnare le pietre
+	 * @param numPietre Numero di pietre da assegnare
+	 */
+	public static void assegnaPietre(TamaGolem golem, int numPietre) {
+		do {
+			System.out.println("Pietre da assegnare: " + numPietre);
+			System.out.println("Pietre disponibili:\n" + pietre.pietreToString());
+			System.out.print("Scrivere il nome (o l'iniziale) della pietra da assengare: ");
+			String input = sc.nextLine();
+			for(String elemDaSacca : pietre) {
+				if(elemDaSacca.equalsIgnoreCase(input) || Character.toString(elemDaSacca.charAt(0)).equalsIgnoreCase(input)) {
+					golem.assegnaPietra(pietre.estraiPietraDef(elemDaSacca));
+				}
+			}
+			numPietre--;
+		} while(numPietre>0);
+	}
 
 }
