@@ -1,11 +1,14 @@
 package codiceHusky.tamaGolem;
+
+import java.util.ArrayList;
+
 public class TamaGolem {
-	private String[] pietre;
+	private ArrayList<String> pietre;
 	private int vitaRimanente;
 	private int ciclo;
 	
-	public TamaGolem(int P) {
-		pietre = new String[P];
+	public TamaGolem() {
+
 		vitaRimanente = TamaMain.VITA_TAMAGOLEM;
 		ciclo = 0;
 	}
@@ -15,21 +18,18 @@ public class TamaGolem {
 	 */
 	private void cicla() {
 		ciclo++;
-		if(ciclo == pietre.length) {
+		if(ciclo == pietre.size()) {
 			ciclo = 0;
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	public void assegnaPietre(SaccaPietre sacca) {
-		for(String pietra : pietre) {
-			pietra = sacca.estraiPietra();
-		}
+	public void assegnaPietra(String pietra) {
+		pietre.add(pietra);
 	}
 	
 	
-	private String getPietraAttiva() {
-		return pietre[ciclo];
+	public String getPietraAttiva() {
+		return pietre.get(ciclo);
 	}
 
 	public int getVitaRimanente() {
