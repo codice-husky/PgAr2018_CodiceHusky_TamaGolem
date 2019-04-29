@@ -9,9 +9,9 @@ public class SaccaPietre extends ArrayList<String> {
 	public SaccaPietre() {
 		super();
 		int pietrePerElemento = calcPietrePerElemento();
-		for(String elemento : TamaMain.ELEMENTI_PIETRE) {
-			for(int i=0; i<pietrePerElemento; i++) {
-				this.add(elemento);
+		for(int i=0; i<TamaMain.elemUtilizzati; i++) {
+			for(int j=0; j<pietrePerElemento; j++) {
+				this.add(TamaMain.ELEMENTI_PIETRE[i]);
 			}
 		}
 	}
@@ -22,9 +22,9 @@ public class SaccaPietre extends ArrayList<String> {
 	 * @return Numero pietre
 	 */
 	private int calcPietrePerElemento() {
-		int nPietre = ((TamaMain.ELEMENTI_PIETRE.length + 1) / 3) + 1;
-		int nGolem = ((TamaMain.ELEMENTI_PIETRE.length - 1) * (TamaMain.ELEMENTI_PIETRE.length - 2) / (nPietre * 2));
-		return ((2 * nGolem * nPietre) / TamaMain.ELEMENTI_PIETRE.length);
+		int nPietre = ((TamaMain.elemUtilizzati + 1) / 3) + 1;
+		int nGolem = ((TamaMain.elemUtilizzati - 1) * (TamaMain.elemUtilizzati - 2) / (nPietre * 2));
+		return ((2 * nGolem * nPietre) / TamaMain.elemUtilizzati);
 	}
 	
 	
