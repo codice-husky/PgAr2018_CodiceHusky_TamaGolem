@@ -22,12 +22,22 @@ public class TamaMain {
 			if(setup()) break;
 			System.out.println("Dato inserito non valido!");
 		} while(true);
-		
+		String partita = "si";
+        while(partita.equals("si")){
+            //qui si esegue tutta la parte di creazione della fase 1 
+        	//e di tutta la partita
+        	partita = risposta();
+        }
 		
 		
 		sc.close();
 	}
-	
+	/**
+	 * Metodo che chiede all'utente quanti elementi vuole utilizzare durante
+	 * la partita, il valore può essere o un numero compreso tra il numero 
+	 * minimo e quello massimo oppure R per un numero random
+	 * @return		true se ha dato una risposta accettabilie
+	 * */
 	public static boolean setup() {
 		System.out.print("Quanti elementi vuoi utilizzare? (" + ELEM_MIN + "-" + ELEM_MAX + ", [R]andom) ");
 		String inputStr = sc.nextLine();
@@ -65,5 +75,22 @@ public class TamaMain {
 			numPietre--;
 		} while(numPietre>0);
 	}
-
+	
+	/**
+	 * Metodo che chiede all'utente se vuole ricominciare una nuova partita
+	 * finché non inserice o si o no
+	 * @return 		risposta dell'utente
+	 * */
+	public static String risposta(){
+        String risp = "";
+        System.out.println("ciao");
+        Scanner sc = new Scanner(System.in);
+        while((!risp.equals("si"))&&(!risp.equals("no"))){
+            System.out.print("Vuoi continuare? (si\\no) ");
+            risp = sc.nextLine();
+            risp = risp.toLowerCase();
+            if(risp.equals("sì")) risp = "si";
+        }
+        return risp;
+    }
 }
