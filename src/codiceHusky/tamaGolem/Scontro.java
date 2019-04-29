@@ -16,7 +16,6 @@ public class Scontro {
 		TamaGolem golemEstratto = g.evocaGolem();
 		if(golemEstratto != null) {
 			g.setGolemAttivo(golemEstratto);
-			golemEstratto.assegnaPietre(sacca);
 			return true;
 		} else {
 			return false;
