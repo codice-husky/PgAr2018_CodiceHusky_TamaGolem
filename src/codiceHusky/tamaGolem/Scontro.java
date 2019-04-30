@@ -14,8 +14,10 @@ public class Scontro {
 	
 	
 	//RESTITUISCE: 
-	//1 se nello scontro ha vinto il golem del player 1
-	//2 se nello scontro ha vinto il golem del player 2
+	//0 nel caso in cui ci sia stato uno scontro normalissimo con un
+	//  golem morto e l'altro vivo, potendo ancora giocare
+	//1 se nello scontro ha vinto LA PARTITA il player 1
+	//2 se nello scontro ha vinto LA PARTITA il player 2
 	//3 se c'è stato un eventuale pareggio dovuto alle pietre uguali
 	public int letThemFight() {
 		TamaGolem t1 = g1.getGolemAttivo();
@@ -33,27 +35,27 @@ public class Scontro {
 				if(controllo == 3)return 3; //3 pietre uguali = pareggio
 			}else {
 				controllo = 0;
-				if(m.matrice[p1][p2]>0) {	//vince p1
+				if(m.matrice[p1][p2]>0) {	//vince la pietra p1
 					t2.riceviDanno(m.matrice[p1][p2]);
 					if(t2.getVitaRimanente() <=0) {
 						g2.eliminaGolem();
 						if(g2.numGolem()>0)
 							g2.setGolemAttivo(); 
-						else return 1;
+						else return 1; //vince LA PARTITA il player 1
 					}
-				}else {						//vince p2
+				}else {						//vince la pietra p2
 					t1.riceviDanno(m.matrice[p2][p1]);
 					if(t1.getVitaRimanente() <=0) {
 						g1.eliminaGolem();
 						if(g1.numGolem()>0)
 							g1.setGolemAttivo(); 
-						else return 2;
-						
+						else return 2; //vince LA PARTITA il player 2
 					}
 				}
 			}	
 			t1.cicla();
 			t2.cicla();	
 		}
+		return 0;
 	}
 }
