@@ -22,11 +22,11 @@ public class TamaMain {
 			if(setup()) break;
 			System.out.println("Dato inserito non valido!");
 		} while(true);
-		String partita = "si";
-        while(partita.equals("si")){
+		boolean partita = true;
+        while(partita){
             //qui si esegue tutta la parte di creazione della fase 1 
         	//e di tutta la partita
-        	partita = risposta();
+        	partita = ricomincia();
         }
 		
 		
@@ -81,16 +81,13 @@ public class TamaMain {
 	 * finché non inserice o si o no
 	 * @return 		risposta dell'utente
 	 * */
-	public static String risposta(){
-        String risp = "";
-        System.out.println("ciao");
-        Scanner sc = new Scanner(System.in);
-        while((!risp.equals("si"))&&(!risp.equals("no"))){
+	public static boolean ricomincia(){
+        do {
             System.out.print("Vuoi continuare? (si\\no) ");
-            risp = sc.nextLine();
-            risp = risp.toLowerCase();
-            if(risp.equals("sì")) risp = "si";
-        }
-        return risp;
+            String risp = sc.nextLine();
+            if(risp.equalsIgnoreCase("si") || risp.equalsIgnoreCase("s�")) return true;
+            else if(risp.equalsIgnoreCase("no")) return false;
+            else System.out.println("Risposta inserita non corretta!");
+        } while(true);
     }
 }
