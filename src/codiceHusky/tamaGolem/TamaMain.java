@@ -10,6 +10,8 @@ public class TamaMain {
 	private static final int ELEM_MIN = 3;
 	public static final int VITA_TAMAGOLEM = 10;
 	public static final String[] ELEMENTI_PIETRE = {"Acqua", "Aria", "Fuoco", "Terra", "Torta", "Fagiolo", "Budino", "Pianta", "Sale", "Pepe"};
+	public static final String[] ELEMENTI_ABBR = {"Q", "A", "F", "T", "O", "L", "B", "I", "S", "P"};
+	
 	public static int elemUtilizzati;
 	
 	
@@ -67,11 +69,23 @@ public class TamaMain {
 		do {
 			System.out.println("Pietre da assegnare: " + numPietre);
 			System.out.println("Pietre disponibili:\n" + pietre.pietreToString());
-			System.out.print("Scrivere il nome (o l'iniziale) della pietra da assengare: ");
+			System.out.print("Scrivere il nome (o la lettera tra parentesi) della pietra da assengare: ");
 			String input = sc.nextLine();
+			
+			if(input.length() == 1) {
+				for(int i=0; i<ELEMENTI_ABBR.length; i++) {
+					String abbr = ELEMENTI_ABBR[i];
+					if(abbr.equalsIgnoreCase(Character.toString(input.charAt(0)))) {
+						input = ELEMENTI_PIETRE[i];
+						golem.assegnaPietra(pietre.estraiPietraDef(input));
+						break;
+					}
+				}
+			}
 			for(String elemDaSacca : pietre) {
-				if(elemDaSacca.equalsIgnoreCase(input) || Character.toString(elemDaSacca.charAt(0)).equalsIgnoreCase(input)) {
-					golem.assegnaPietra(pietre.estraiPietraDef(elemDaSacca));
+				if(elemDaSacca.equalsIgnoreCase(input)) {
+					golem.assegnaPietra(pietre.estraiPietraDef(input));
+					break;
 				}
 			}
 			numPietre--;

@@ -66,7 +66,7 @@ public class SaccaPietre extends ArrayList<String> {
 			for(String pietra : this) {
 				if(pietra.equalsIgnoreCase(TamaMain.ELEMENTI_PIETRE[i])) qtaElem++;
 			}
-			output = output.concat(TamaMain.ELEMENTI_PIETRE[i] + ": " + qtaElem + "\t");
+			output = output.concat(TamaMain.ELEMENTI_PIETRE[i] + "(" + TamaMain.ELEMENTI_ABBR[i] + "): " + qtaElem + "\n");
 		}
 		return output;
 	}
