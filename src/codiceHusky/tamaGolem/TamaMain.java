@@ -23,7 +23,9 @@ public class TamaMain {
 			System.out.println("Dato inserito non valido!");
 		} while(true);
 		boolean partita = true;
-        while(partita){
+        while(partita) {
+        	//RICORDARSI CHE DOPO AVER AGGIUNTO I GOLEM AI GIOCATORE
+        	//DI CHIAMARE IL METODO setGolemAttivo() nella classe giocatore
             //qui si esegue tutta la parte di creazione della fase 1 
         	//e di tutta la partita
         	partita = ricomincia();
@@ -85,7 +87,7 @@ public class TamaMain {
         do {
             System.out.print("Vuoi continuare? (si\\no) ");
             String risp = sc.nextLine();
-            if(risp.equalsIgnoreCase("si") || risp.equalsIgnoreCase("sì")) return true;
+            if(risp.equalsIgnoreCase("si") || risp.equalsIgnoreCase("sï¿½")) return true;
             else if(risp.equalsIgnoreCase("no")) return false;
             else System.out.println("Risposta inserita non corretta!");
         } while(true);

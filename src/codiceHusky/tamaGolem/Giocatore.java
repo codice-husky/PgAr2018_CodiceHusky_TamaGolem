@@ -19,29 +19,9 @@ public class Giocatore {
 		return golemAttivo;
 	}
 
-
-	public void setGolemAttivo(TamaGolem golemAttivo) {
-		this.golemAttivo = golemAttivo;
+	public void setGolemAttivo() {
+		this.golemAttivo = squadra.get(0);
 	}
-
-
-	public TamaGolem evocaGolem() {
-		if(squadra.size()>0) {
-			TamaGolem golem = null;
-			int i = 0;
-			do {
-				try {
-					golem = squadra.get(i);
-				} catch (ArrayIndexOutOfBoundsException e) {
-					return null;
-				}
-				i++;
-			} while(golem.getVitaRimanente()<=0);
-			return golem;
-		}
-		return null;
-	}
-	
 	
 	public void assegnaGolem() {
 		int numGolem = (TamaMain.elemUtilizzati-1)*(TamaMain.elemUtilizzati-2)/(2*((TamaMain.elemUtilizzati+1)/3)+1);
@@ -50,4 +30,14 @@ public class Giocatore {
 		}
 	}
 	
+	
+    //da mettere nel giocatore
+    public void eliminaGolem(){
+    	golemAttivo = null;
+    	squadra.set(0, null);
+    }
+	
+    public int numGolem(){
+    	return squadra.size();
+    }
 }

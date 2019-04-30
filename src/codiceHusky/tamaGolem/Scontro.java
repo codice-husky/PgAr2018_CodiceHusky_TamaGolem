@@ -12,21 +12,15 @@ public class Scontro {
 		this.m = m;
 	}
 	
-	public boolean nuovoGolem(Giocatore g, SaccaPietre sacca) {
-		TamaGolem golemEstratto = g.evocaGolem();
-		if(golemEstratto != null) {
-			g.setGolemAttivo(golemEstratto);
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
-	
-	public void letThemFight() {
-		
+	//RESTITUISCE: 
+	//1 se nello scontro ha vinto il golem del player 1
+	//2 se nello scontro ha vinto il golem del player 2
+	//3 se c'è stato un eventuale pareggio dovuto alle pietre uguali
+	public int letThemFight() {
 		TamaGolem t1 = g1.getGolemAttivo();
 		TamaGolem t2 = g2.getGolemAttivo();
+		int controllo = 0; //verifica che non ci siano 3 pietre uguali
 		
 		while(t1.getVitaRimanente()>0 || t2.getVitaRimanente()>0) {
 			
@@ -34,25 +28,32 @@ public class Scontro {
 			int p2 = t2.getPietraAttiva();
 			
 			
-			if(m.matrice[p1][p2]==0) ;		//pari
-			else {
+			if(m.matrice[p1][p2]==0) {//pari
+				controllo ++;
+				if(controllo == 3)return 3; //3 pietre uguali = pareggio
+			}else {
+				controllo = 0;
 				if(m.matrice[p1][p2]>0) {	//vince p1
 					t2.riceviDanno(m.matrice[p1][p2]);
+					if(t2.getVitaRimanente() <=0) {
+						g2.eliminaGolem();
+						if(g2.numGolem()>0)
+							g2.setGolemAttivo(); 
+						else return 1;
+					}
+				}else {						//vince p2
+					t1.riceviDanno(m.matrice[p2][p1]);
+					if(t1.getVitaRimanente() <=0) {
+						g1.eliminaGolem();
+						if(g1.numGolem()>0)
+							g1.setGolemAttivo(); 
+						else return 2;
+						
+					}
 				}
-				else {						//vince p2
-					t1.riceviDanno(-(m.matrice[p1][p2]));
-				}
-			}
-			
+			}	
 			t1.cicla();
-			t2.cicla();
-			
-			
-			
+			t2.cicla();	
 		}
-		
-		
 	}
-	
-	
 }
