@@ -16,7 +16,7 @@ public class TamaGolem {
 	/**
 	 * Metodo che viene usato per capire quale pietra lanciare
 	 */
-	private void cicla() {
+	public void cicla() {
 		ciclo++;
 		if(ciclo == pietre.size()) {
 			ciclo = 0;
@@ -34,5 +34,9 @@ public class TamaGolem {
 
 	public int getVitaRimanente() {
 		return vitaRimanente;
+	}
+	
+	public void riceviDanno(int danno) {
+		vitaRimanente -= danno;
 	}
 }
