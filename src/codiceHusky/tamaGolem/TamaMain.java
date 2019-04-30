@@ -101,7 +101,7 @@ public class TamaMain {
         do {
             System.out.print("Vuoi continuare? (si\\no) ");
             String risp = sc.nextLine();
-            if(risp.equalsIgnoreCase("si") || risp.equalsIgnoreCase("s�")) return true;
+            if(risp.equalsIgnoreCase("si") || risp.equalsIgnoreCase("sì")) return true;
             else if(risp.equalsIgnoreCase("no")) return false;
             else System.out.println("Risposta inserita non corretta!");
         } while(true);

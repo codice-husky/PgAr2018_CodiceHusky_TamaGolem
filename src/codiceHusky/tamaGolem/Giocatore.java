@@ -24,7 +24,7 @@ public class Giocatore {
 	}
 	
 	public void assegnaGolem() {
-		int numGolem = (TamaMain.elemUtilizzati-1)*(TamaMain.elemUtilizzati-2)/(2*((TamaMain.elemUtilizzati+1)/3)+1);
+		int numGolem = (int) (Math.ceil(TamaMain.elemUtilizzati-1)*(TamaMain.elemUtilizzati-2)/(2*((TamaMain.elemUtilizzati+1)/3)+1));
 		for(int i=0; i<numGolem; i++) {
 			squadra.add(new TamaGolem());
 		}

@@ -22,9 +22,9 @@ public class SaccaPietre extends ArrayList<String> {
 	 * @return Numero pietre
 	 */
 	private int calcPietrePerElemento() {
-		int nPietre = ((TamaMain.elemUtilizzati + 1) / 3) + 1;
-		int nGolem = ((TamaMain.elemUtilizzati - 1) * (TamaMain.elemUtilizzati - 2) / (nPietre * 2));
-		return ((2 * nGolem * nPietre) / TamaMain.elemUtilizzati);
+		int nPietre = (int) Math.ceil((TamaMain.elemUtilizzati + 1) / 3) + 1;
+		int nGolem = (int) Math.ceil(((TamaMain.elemUtilizzati - 1) * (TamaMain.elemUtilizzati - 2) / (nPietre * 2)));
+		return (int) Math.ceil(((2 * nGolem * nPietre) / TamaMain.elemUtilizzati));
 	}
 	
 	
