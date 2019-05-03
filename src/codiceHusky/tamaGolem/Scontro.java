@@ -26,8 +26,8 @@ public class Scontro {
 		
 		while(t1.getVitaRimanente()>0 || t2.getVitaRimanente()>0) {
 			
-			int p1 = t1.getPietraAttiva();
-			int p2 = t2.getPietraAttiva();
+			int p1 = numPietra(t1.getPietraAttiva());
+			int p2 = numPietra(t2.getPietraAttiva());
 			
 			
 			if(m.matrice[p1][p2]==0) {//pari
@@ -58,4 +58,17 @@ public class Scontro {
 		}
 		return 0;
 	}
+	
+	// metodo che cerca la pietra nel vettore ELEMENTI_PIETRE e ne restituisce la posizione
+	
+	private int numPietra(String pietra) {
+		for (int i=0 ; i<TamaMain.ELEMENTI_PIETRE.length ; i++) {
+			if (TamaMain.ELEMENTI_PIETRE[i].equals(pietra)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	
 }
