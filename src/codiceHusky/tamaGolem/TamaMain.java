@@ -1,9 +1,7 @@
 package codiceHusky.tamaGolem;
 
 import java.util.Scanner;
-
 import org.apache.commons.lang3.StringUtils;
-
 
 public class TamaMain {
 	private static final String DATO_NON_VALIDO = "Dato inserito non valido!";
@@ -68,7 +66,8 @@ public class TamaMain {
         	//e di tutta la partita
         	partita = ricomincia();
         }
-		
+		System.out.println("\n L'equilibrio era: \n");
+		visualizzaEquilibrio();
 		
 		sc.close();
 	}
@@ -149,5 +148,66 @@ public class TamaMain {
             else if(risp.equalsIgnoreCase("no")) return false;
             else System.out.println(DATO_NON_VALIDO);
         } while(true);
+	}
+	
+	public static void visualizzaEquilibrio() {
+        int maxLength =3;
+        for(int i = 0;i < ELEMENTI_PIETRE.length; i++){
+            if(ELEMENTI_PIETRE[i].length() > maxLength){
+                maxLength = ELEMENTI_PIETRE[i].length();
+            }
+        }
+        for(int i=-1;i<ELEMENTI_PIETRE.length;i++){
+            if(i == -1){
+                System.out.print("|");
+                for(int j=0;j<maxLength;j++){
+                    System.out.print(" ");
+                }
+                System.out.print("|");
+            }else{
+                int spazi = maxLength-ELEMENTI_PIETRE[i].length();
+                int dopo = spazi / 2,prima = spazi - dopo;
+                for(int j=0;j<prima;j++){
+                    System.out.print(" ");
+                }
+                System.out.print(ELEMENTI_PIETRE[i]);
+                for(int j=0;j<dopo;j++){
+                    System.out.print(" ");
+                }
+                System.out.print("|");
+            }
+        }
+        System.out.println("");
+        for(int i=0;i<ELEMENTI_PIETRE.length;i++){
+           for(int j=-1;j<ELEMENTI_PIETRE.length;j++){
+                if(j== -1){
+                    System.out.print("|");
+                    int spazi = maxLength - ELEMENTI_PIETRE[i].length();
+                    int dopo = spazi/2,prima = spazi-dopo;
+                    for(int k=0;k < prima;k++){
+                       System.out.print(" ");
+                    }
+                    System.out.print(ELEMENTI_PIETRE[i]);
+                    for(int k=0;k<dopo;k++){
+                        System.out.print(" ");
+                    }
+                    System.out.print("|");
+                }else{
+                    String memo = ""+matriceElementi.getMatrice()[i][j];
+                    int spazi = maxLength - memo.length();
+                    int dopo = spazi / 2, prima = spazi - dopo;
+                    for(int k = 0;k < prima; k++){
+                        System.out.print(" ");
+                    }
+                    System.out.print(memo);
+                    for(int k = 0; k < dopo; k++){
+                        System.out.print(" ");
+                    }
+                    System.out.print("|");
+                }
+           } 
+            System.out.println("");
+        }
+        System.out.println("\n\n");
 	}
 }

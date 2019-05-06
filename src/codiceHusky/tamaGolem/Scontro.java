@@ -18,7 +18,6 @@ public class Scontro {
 		//  golem morto e l'altro vivo, potendo ancora giocare
 		//1 se nello scontro ha vinto LA PARTITA il player 1
 		//2 se nello scontro ha vinto LA PARTITA il player 2
-		//3 se c'è stato un eventuale pareggio dovuto alle pietre uguali
 		public int letThemFight() {
 			TamaGolem t1 = g1.getGolemAttivo();
 			TamaGolem t2 = g2.getGolemAttivo();
