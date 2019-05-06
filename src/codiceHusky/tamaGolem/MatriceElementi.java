@@ -1,4 +1,7 @@
 package codiceHusky.tamaGolem;
+
+import java.util.ArrayList;
+
 /**
  * Questa classe crea la matrice di collegamenti tra i vari elementi.
  * In pratica il funzionamento prevede che ciascun collegamento da e fa
@@ -117,6 +120,90 @@ public class MatriceElementi {
         }
         matr[GRAND-2][GRAND-1] = -last;
         matr[GRAND-1][GRAND-2] = last;
+        if(matr[GRAND-2][GRAND-1]<-V || matr[GRAND-2][GRAND-1]>V){
+            ArrayList<Integer> elementi = new ArrayList<Integer>();
+            for(int k = 0;k<(GRAND-2);k++){
+                elementi.add(matr[GRAND-2][k]);
+            }
+            
+            if(matr[GRAND-2][GRAND-1]<-V){
+                ArrayList<Integer> memo = new ArrayList<>(elementi);
+                int differenzaTot = matr[GRAND-2][GRAND-1]-(-V);
+                int differenza = 1;
+                while(differenzaTot < 0){
+                    int colonnaRandom = (int)(Math.random()*memo.size());
+                    if( controllo(matr[GRAND-2][colonnaRandom]-differenza, V) &&
+                        controllo(matr[GRAND-1][colonnaRandom]+differenza,V)){
+
+                        matr[GRAND-2][colonnaRandom] -= differenza;
+                        matr[colonnaRandom][GRAND-2] += differenza;
+
+                        matr[GRAND-1][colonnaRandom] += differenza;
+                        matr[colonnaRandom][GRAND-1] -= differenza;
+
+                        matr[GRAND-2][GRAND-1] += differenza;
+                        matr[GRAND-1][GRAND-2] -= differenza;
+
+                        differenzaTot += differenza; 
+
+                        memo = new ArrayList<>(elementi);
+                        differenza = 1;
+                    }else{
+                        memo.remove(colonnaRandom);
+                        if(memo.isEmpty()){
+                            differenza++;
+                            memo = new ArrayList<>(elementi);
+                        }
+                    }
+
+                }
+            }else{
+                ArrayList<Integer> memo = new ArrayList<>(elementi);
+                int differenzaTot = matr[GRAND-2][GRAND-1]-V;
+                int differenza = 1;
+                while(differenzaTot > 0){
+                    int colonnaRandom = (int)(Math.random()*memo.size());
+                    if( controllo(matr[GRAND-2][colonnaRandom]+differenza, V) &&
+                        controllo(matr[GRAND-1][colonnaRandom]-differenza,V)){
+
+                        matr[GRAND-2][colonnaRandom] += differenza;
+                        matr[colonnaRandom][GRAND-2] -= differenza;
+
+                        matr[GRAND-1][colonnaRandom] -= differenza;
+                        matr[colonnaRandom][GRAND-1] += differenza;
+
+                        matr[GRAND-2][GRAND-1] -= differenza;
+                        matr[GRAND-1][GRAND-2] += differenza;
+
+                        differenzaTot -= differenza; 
+
+                        memo = new ArrayList<>(elementi);
+                        differenza = 1;
+                    }else{
+                        memo.remove(colonnaRandom);
+                        if(memo.isEmpty()){
+                            differenza++;
+                            memo = new ArrayList<>(elementi);
+                        }
+                    }                
+                }
+            }
+        }
         return matr;
     }
+	/**
+	 * Metodo che controlla la validità di un valore ovvero, se
+	 * è diverso da 0, e compreso tra -vita del golem e +vita
+	 * del golem
+	 * @param x  	il valore da controllare
+	 * @param v		la vita del tamagolem
+	 * @return		true se è un valore accettabile, altrimenti false
+	 * */
+    public static boolean controllo(Integer x,int v){
+        if(x>=(-v) && x<=v && x!=0) return true;
+        return false;
+    }
+    
+
+	
 }
