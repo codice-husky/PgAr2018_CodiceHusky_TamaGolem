@@ -1,5 +1,6 @@
 package codiceHusky.tamaGolem;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,53 +23,90 @@ public class TamaMain {
 	public static Scontro scontro;
 	
 	
-	public static final SaccaPietre pietre = new SaccaPietre();
+	public static SaccaPietre pietre;
 	private static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		System.out.println("---TAMAGOLEM CODICE HUSKY---");
-		setup();
-		boolean partita = true;
-        while(partita) {
-        	do {
-    			if(richiestaElementi()) break;
-    			System.out.println(DATO_NON_VALIDO);
-    		} while(true);
-        	scontro = new Scontro(new Giocatore(), new Giocatore(), matriceElementi);
-        	scontro.getG1().assegnaGolem();
-        	scontro.getG1().setGolemAttivo();
-        	scontro.getG2().assegnaGolem();
-        	
-        	int x = -1;
-            while (x!= 1 && x!= 2) { //1 se vince la partita il giocatore 1, 2 il giocatore 2
-               x=-1;
-               while (x == -1){
-            	   x = 0;
-	               scontro.getG2().setGolemAttivo();
-	               if(scontro.getG1().getGolemAttivo().numPietre()==0) {
-	            	   System.out.println("Giocatore 1: assegna le pietre al tuo golem");
-	            	   assegnaPietre(scontro.getG1().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
-	               }
-	               if(scontro.getG2().getGolemAttivo().numPietre()==0){
-	            	   System.out.println("Giocatore 2: assegna le pietre al tuo golem");
-	            	   assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
-	               }
-               }
-               
-               x = scontro.letThemFight();
-            }
-            
-            if(x==1) System.out.println("Il giocatore 1 ha vinto!");
-            else if(x==2) System.out.println("Il giocatore 2 ha vinto!");
-        	//RICORDARSI CHE DOPO AVER AGGIUNTO I GOLEM AI GIOCATORE
-        	//DI CHIAMARE IL METODO setGolemAttivo() nella classe giocatore
-            //qui si esegue tutta la parte di creazione della fase 1 
-        	//e di tutta la partita
-        	partita = ricomincia();
-        }
-		System.out.println("\n L'equilibrio era: \n");
-		visualizzaEquilibrio();
 		
+		do {
+			if(richiestaElementi()) break;
+			System.out.println(DATO_NON_VALIDO);
+		} while(true);
+		pietre = new SaccaPietre();
+		setup();
+		boolean continua = true, prima = true;
+		while(continua) {
+			if(!prima) {
+				do {
+					if(richiestaElementi()) break;
+					System.out.println(DATO_NON_VALIDO);
+				} while(true);
+				pietre = new SaccaPietre();
+			}else {
+				prima = false;
+			}
+			scontro = new Scontro(new Giocatore(),new Giocatore(),matriceElementi);
+			scontro.getG1().assegnaGolem();
+			scontro.getG1().setGolemAttivo();
+			scontro.getG2().assegnaGolem();
+			scontro.getG2().setGolemAttivo();
+			int x = -1;
+			while(x!= 1 && x!=2) {//se x == 1 allora ha vinto il giocatore 1 altrimenti il 2
+				x = -1;
+				while(x== -1) {
+					x = 0;
+					while(true) {
+						if(scontro.getG1().getGolemAttivo().numPietre()==0) {
+							System.out.println("Giocatore 1: assegna le pietre al tuo golem");
+							assegnaPietre(scontro.getG1().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
+						}
+						boolean uguali = true;
+						if(scontro.getG2().getGolemAttivo().numPietre()==0){
+							System.out.println("Giocatore 2: assegna le pietre al tuo golem");
+							assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
+						}
+						
+						int nPietre =(int) (Math.ceil((elemUtilizzati + 1)/3) + 1);
+            	   		for(int p = 0;p<nPietre;p++) {
+            	   			if(scontro.getG1().getGolemAttivo().getPietre().get(p) != 
+            	   			   scontro.getG2().getGolemAttivo().getPietre().get(p)) {
+            	   				uguali = false;
+            	   				break;
+            	   			}
+	               		}
+            	   		if(uguali) {
+            	   			System.out.println("I 2 giocatori hanno scelto le stesse pietre.\n"
+            	   					+ "Bisogna riscieglierle");
+            	   			ArrayList<String>pietreDaRimettere = new ArrayList<String>();
+            	   			for(int w = 0;w<scontro.getG1().getGolemAttivo().numPietre();w++) {
+            	   				pietreDaRimettere.add(scontro.getG1().getGolemAttivo().getPietre().get(w));
+            	   				pietreDaRimettere.add(scontro.getG2().getGolemAttivo().getPietre().get(w));
+            	   				scontro.getG1().getGolemAttivo().getPietre().remove(w);
+            	   				scontro.getG2().getGolemAttivo().getPietre().remove(w);
+            	   			}
+            	   			String[] def = new String[pietreDaRimettere.size()];
+            	   			def = pietreDaRimettere.toArray(def);
+            	   			pietre.reinserisci(def	);
+            	   		}else {
+            	   			break;
+            	   		}
+        	   		}
+					x = scontro.letThemFight();
+					if(x == 1) {
+						System.out.println("IL VINCITORE E' IL GIOCATORE 1");
+						break;
+					}else if(x == 2) {
+						System.out.println("IL VINCITORE E' IL GIOCATORE 2");
+					}else {
+						x = -1;
+					}
+				}
+			}
+			System.out.println("\nEcco qual'era l'equilibrio del sistema\n");
+			visualizzaEquilibrio();
+			continua = ricomincia();
+		}
 		sc.close();
 	}
 	

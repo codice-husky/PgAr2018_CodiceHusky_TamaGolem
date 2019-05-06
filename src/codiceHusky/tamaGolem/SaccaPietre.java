@@ -84,4 +84,10 @@ public class SaccaPietre extends ArrayList<String> {
 		return -1;
 	}
 	
+	public void reinserisci(String[] prelevate) {
+		for(int i = 0;i<prelevate.length;i++) {
+			this.add(prelevate[i]);
+		}
+	}
+	
 }

@@ -8,6 +8,7 @@ public class Giocatore {
 	private TamaGolem golemAttivo;
 	
 	public Giocatore() {
+		squadra = new ArrayList<TamaGolem>();
 	}
 
 	public void aggiungiGolem(TamaGolem golem) {

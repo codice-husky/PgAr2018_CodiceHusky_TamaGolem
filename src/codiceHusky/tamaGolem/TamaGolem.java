@@ -8,7 +8,7 @@ public class TamaGolem {
 	private int ciclo;
 	
 	public TamaGolem() {
-
+		pietre = new ArrayList<String>();
 		vitaRimanente = TamaMain.VITA_TAMAGOLEM;
 		ciclo = 0;
 	}
@@ -41,5 +41,8 @@ public class TamaGolem {
 	}
 	public int numPietre() {
 		return pietre.size();
+	}
+	public ArrayList<String> getPietre(){
+		return pietre;
 	}
 }
