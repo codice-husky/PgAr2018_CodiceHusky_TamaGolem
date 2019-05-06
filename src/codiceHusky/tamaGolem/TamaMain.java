@@ -39,6 +39,7 @@ public class TamaMain {
         	scontro = new Scontro(new Giocatore(), new Giocatore(), matriceElementi);
         	scontro.getG1().assegnaGolem();
         	scontro.getG2().assegnaGolem();
+        	System.out.println("Giocatore 1");
         	//RICORDARSI CHE DOPO AVER AGGIUNTO I GOLEM AI GIOCATORE
         	//DI CHIAMARE IL METODO setGolemAttivo() nella classe giocatore
             //qui si esegue tutta la parte di creazione della fase 1 
