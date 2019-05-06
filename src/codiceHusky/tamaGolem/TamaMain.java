@@ -40,15 +40,23 @@ public class TamaMain {
         	scontro.getG1().assegnaGolem();
         	scontro.getG1().setGolemAttivo();
         	scontro.getG2().assegnaGolem();
-        	scontro.getG2().setGolemAttivo();
-        	if(scontro.getG1().getGolemAttivo().numPietre()==0) {
-        		System.out.println("Giocatore 1: assegna le pietre al tuo golem");
-        		assegnaPietre(scontro.getG1().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
-        	}
-        	if(scontro.getG2().getGolemAttivo().numPietre()==0){
-        		System.out.println("Giocatore 2: assegna le pietre al tuo golem");
-        		assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
-        	}
+        	
+        	int x = -1;
+            while (x!= 1 && x!= 2) { //1 se vince la partita il giocatore 1, 2 il giocatore 2
+               x=-1;
+               while (x == -1){
+            	   x = 0;
+	               scontro.getG2().setGolemAttivo();
+	               if(scontro.getG1().getGolemAttivo().numPietre()==0) {
+	            	   System.out.println("Giocatore 1: assegna le pietre al tuo golem");
+	            	   assegnaPietre(scontro.getG1().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
+	               }
+	               if(scontro.getG2().getGolemAttivo().numPietre()==0){
+	            	   System.out.println("Giocatore 2: assegna le pietre al tuo golem");
+	            	   assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
+	               }
+               }
+            }
         	//RICORDARSI CHE DOPO AVER AGGIUNTO I GOLEM AI GIOCATORE
         	//DI CHIAMARE IL METODO setGolemAttivo() nella classe giocatore
             //qui si esegue tutta la parte di creazione della fase 1 
