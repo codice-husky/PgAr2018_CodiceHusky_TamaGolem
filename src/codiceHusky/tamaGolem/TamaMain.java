@@ -21,6 +21,7 @@ public class TamaMain {
 	public static int elemUtilizzati;
 	private static final String ELEMENTI_SELEZIONATI_RANDOM = "Sono stati selezionati " + elemUtilizzati + " elementi";
 	public static MatriceElementi matriceElementi;
+	public static Scontro scontro;
 	
 	
 	public static final SaccaPietre pietre = new SaccaPietre();
@@ -28,12 +29,16 @@ public class TamaMain {
 	
 	public static void main(String[] args) {
 		System.out.println("---TAMAGOLEM CODICE HUSKY---");
-		do {
-			if(setup()) break;
-			System.out.println(DATO_NON_VALIDO);
-		} while(true);
+		setup();
 		boolean partita = true;
         while(partita) {
+        	do {
+    			if(richiestaElementi()) break;
+    			System.out.println(DATO_NON_VALIDO);
+    		} while(true);
+        	scontro = new Scontro(new Giocatore(), new Giocatore(), matriceElementi);
+        	scontro.getG1().assegnaGolem();
+        	scontro.getG2().assegnaGolem();
         	//RICORDARSI CHE DOPO AVER AGGIUNTO I GOLEM AI GIOCATORE
         	//DI CHIAMARE IL METODO setGolemAttivo() nella classe giocatore
             //qui si esegue tutta la parte di creazione della fase 1 
@@ -44,13 +49,12 @@ public class TamaMain {
 		
 		sc.close();
 	}
+	
 	/**
-	 * Metodo che chiede all'utente quanti elementi vuole utilizzare durante
-	 * la partita, il valore può essere o un numero compreso tra il numero 
-	 * minimo e quello massimo oppure R per un numero random
-	 * @return		true se ha dato una risposta accettabilie
-	 * */
-	public static boolean setup() {
+	 * Chiede all'utente con quanti elementi vuole giocare
+	 * @return true se il dato inserito è accettabile, false altrimenti
+	 */
+	public static boolean richiestaElementi() {
 		System.out.print(RICHIESTA_ELEMENTI);
 		String inputStr = sc.nextLine();
 		if(StringUtils.isNumeric(inputStr)) {
@@ -64,10 +68,17 @@ public class TamaMain {
 				System.out.println(ELEMENTI_SELEZIONATI_RANDOM);
 			} else return false;
 		}
-		matriceElementi = new MatriceElementi();
-		System.out.println(EQUILIBRIO_STABILITO);
 		return true;
 	}
+	
+	/**
+	 * Inizializza la matrice delle forze
+	 * */
+	public static void setup() {
+		matriceElementi = new MatriceElementi();
+		System.out.println(EQUILIBRIO_STABILITO);
+	}
+	
 	
 	/**
 	 * Permette la scelta delle pietre di un golem

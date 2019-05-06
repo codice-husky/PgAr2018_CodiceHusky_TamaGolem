@@ -69,6 +69,15 @@ public class Scontro {
 		}
 		return -1;
 	}
-	
+
+
+	public Giocatore getG1() {
+		return g1;
+	}
+
+
+	public Giocatore getG2() {
+		return g2;
+	}
 	
 }
