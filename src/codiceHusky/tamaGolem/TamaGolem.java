@@ -39,4 +39,7 @@ public class TamaGolem {
 	public void riceviDanno(int danno) {
 		vitaRimanente -= danno;
 	}
+	public int numPietre() {
+		return pietre.size();
+	}
 }
