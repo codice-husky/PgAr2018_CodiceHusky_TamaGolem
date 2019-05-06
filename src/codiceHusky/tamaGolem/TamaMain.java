@@ -56,7 +56,12 @@ public class TamaMain {
 	            	   assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
 	               }
                }
+               
+               x = scontro.letThemFight();
             }
+            
+            if(x==1) System.out.println("Il giocatore 1 ha vinto!");
+            else if(x==2) System.out.println("Il giocatore 2 ha vinto!");
         	//RICORDARSI CHE DOPO AVER AGGIUNTO I GOLEM AI GIOCATORE
         	//DI CHIAMARE IL METODO setGolemAttivo() nella classe giocatore
             //qui si esegue tutta la parte di creazione della fase 1 
