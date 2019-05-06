@@ -80,6 +80,7 @@ public class SaccaPietre extends ArrayList<String> {
 		int pos = 0;
 		for(String elem : this) {
 			if(elem.equalsIgnoreCase(query)) return pos;
+			pos++;
 		}
 		return -1;
 	}
