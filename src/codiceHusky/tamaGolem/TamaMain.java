@@ -38,12 +38,16 @@ public class TamaMain {
     		} while(true);
         	scontro = new Scontro(new Giocatore(), new Giocatore(), matriceElementi);
         	scontro.getG1().assegnaGolem();
+        	scontro.getG1().setGolemAttivo();
         	scontro.getG2().assegnaGolem();
+        	scontro.getG2().setGolemAttivo();
         	if(scontro.getG1().getGolemAttivo().numPietre()==0) {
-        		
+        		System.out.println("Giocatore 1: assegna le pietre al tuo golem");
+        		assegnaPietre(scontro.getG1().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
         	}
         	if(scontro.getG2().getGolemAttivo().numPietre()==0){
-        		
+        		System.out.println("Giocatore 2: assegna le pietre al tuo golem");
+        		assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
         	}
         	//RICORDARSI CHE DOPO AVER AGGIUNTO I GOLEM AI GIOCATORE
         	//DI CHIAMARE IL METODO setGolemAttivo() nella classe giocatore
