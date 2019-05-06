@@ -90,11 +90,12 @@ public class TamaMain {
 						break;
 					}
 				}
-			}
-			for(String elemDaSacca : pietre) {
-				if(elemDaSacca.equalsIgnoreCase(input)) {
-					golem.assegnaPietra(pietre.estraiPietraDef(input));
-					break;
+			} else {
+				for(String elemDaSacca : pietre) {
+					if(elemDaSacca.equalsIgnoreCase(input)) {
+						golem.assegnaPietra(pietre.estraiPietraDef(input));
+						break;
+					}
 				}
 			}
 			numPietre--;
