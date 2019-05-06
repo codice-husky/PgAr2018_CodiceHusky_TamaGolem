@@ -34,8 +34,7 @@ public class Giocatore {
 	
     //da mettere nel giocatore
     public void eliminaGolem(){
-    	golemAttivo = null;
-    	squadra.set(0, null);
+    	squadra.remove(golemAttivo);
     }
 	
     public int numGolem(){

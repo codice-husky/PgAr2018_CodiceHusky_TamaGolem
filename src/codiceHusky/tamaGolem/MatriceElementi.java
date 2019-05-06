@@ -28,7 +28,7 @@ public class MatriceElementi {
 	 * */
 	public MatriceElementi(){
 		int vita = TamaMain.VITA_TAMAGOLEM;
-		int elementi = TamaMain.elemUtilizzati;
+		int elementi = TamaMain.ELEMENTI_PIETRE.length;
 		matrice = creaMatrice(vita,elementi);
 		/*in pratica tutta la matrice è generata con numeri randomici tranne
 			nell'esempio di prima le celle 4, che sono date dalla somma degli

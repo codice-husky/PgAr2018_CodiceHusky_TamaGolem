@@ -51,6 +51,9 @@ public class TamaMain {
 			scontro.getG1().setGolemAttivo();
 			scontro.getG2().assegnaGolem();
 			scontro.getG2().setGolemAttivo();
+			
+			System.out.println("-------------");
+			System.out.println("Ogni giocatore avrà a disposizione "+ scontro.getG1().numGolem()+" golem");
 			int x = -1;
 			while(x!= 1 && x!=2) {//se x == 1 allora ha vinto il giocatore 1 altrimenti il 2
 				x = -1;
@@ -85,9 +88,10 @@ public class TamaMain {
             	   				scontro.getG1().getGolemAttivo().getPietre().remove(w);
             	   				scontro.getG2().getGolemAttivo().getPietre().remove(w);
             	   			}
+            	   			System.out.println(scontro.getG1().getGolemAttivo().numPietre());
             	   			String[] def = new String[pietreDaRimettere.size()];
             	   			def = pietreDaRimettere.toArray(def);
-            	   			pietre.reinserisci(def	);
+            	   			pietre.reinserisci(def);
             	   		}else {
             	   			break;
             	   		}
