@@ -26,14 +26,15 @@ public class Scontro {
 				
 				int p1 = numPietra(t1.getPietraAttiva());
 				int p2 = numPietra(t2.getPietraAttiva());
+				
 					
 				if(m.matrice[p1][p2]>0) {	//vince la pietra p1
 					t2.riceviDanno(m.matrice[p1][p2]);
-					System.out.println("Il giocatore 1 infligge un danno di "+
+					System.out.println(g1.getNome() +" infligge un danno di "+
 					m.matrice[p1][p2]);
 					if(t2.getVitaRimanente() <=0) {
 						g2.eliminaGolem();
-						System.out.println("Viene eliminato il golem del giocatore 2");
+						System.out.println("Viene eliminato il golem di "+ g2.getNome());
 						if(g2.numGolem()>0)
 							g2.setGolemAttivo(); 
 						else return 1; //vince LA PARTITA il player 1
@@ -43,11 +44,11 @@ public class Scontro {
 					System.out.println("Le pietre dei 2 golem sono uguali");
 				}else {						//vince la pietra p2
 					t1.riceviDanno(m.matrice[p2][p1]);
-					System.out.println("Il giocatore 2 infligge un danno di "+
+					System.out.println(g2.getNome() +" infligge un danno di "+
 							m.matrice[p2][p1]);
 					if(t1.getVitaRimanente() <=0) {
 						g1.eliminaGolem();
-						System.out.println("Viene eliminato il golem del giocatore 1");
+						System.out.println("Viene eliminato il golem di "+ g1.getNome());
 						if(g1.numGolem()>0)
 							g1.setGolemAttivo(); 
 						else return 2; //vince LA PARTITA il player 2

@@ -9,14 +9,14 @@ public class TamaMain {
 	private static final String VUOI_CONTINUARE = "Vuoi continuare? (si\\no) ";
 	private static final String RICHIESTA_PIETRE_DA_ASSEGNARE = "Scrivere il nome (o la lettera tra parentesi) della pietra da assengare: ";
 	private static final String PIETRE_DISPONIBILI = "Pietre disponibili:\n";
-	private static final String PIETRE_DA_ASSEGNARE = "Pietre da assegnare: ";
+	private static final String PIETRE_DA_ASSEGNARE = "\nPietre da assegnare: ";
 	private static final String EQUILIBRIO_STABILITO = "L'equilibrio è stato stabilito";
 	private static final int ELEM_MAX = 10;
 	private static final int ELEM_MIN = 3;
-	private static final String RICHIESTA_ELEMENTI = "Quanti elementi vuoi utilizzare? (" + ELEM_MIN + "-" + ELEM_MAX + ", [R]andom) ";
+	private static final String RICHIESTA_ELEMENTI = "Quanti elementi volete utilizzare? (" + ELEM_MIN + "-" + ELEM_MAX + ", [R]andom) ";
 	public static final int VITA_TAMAGOLEM = 10;
-	public static final String[] ELEMENTI_PIETRE = {"Acqua", "Aria", "Fuoco", "Terra", "Torta", "Fagiolo", "Budino", "Pianta", "Sale", "Pepe"};
-	public static final String[] ELEMENTI_ABBR = {"Q", "A", "F", "T", "O", "L", "B", "I", "S", "P"};
+	public static final String[] ELEMENTI_PIETRE = {"Acqua", "Vento", "Fuoco", "Terra", "Elettro", "Luce", "Buio", "Pianta", "Drago", "Metallo"};
+	public static final String[] ELEMENTI_ABBR = {"A", "V", "F", "T", "E", "L", "B", "P", "D", "M"};
 	public static int elemUtilizzati;
 	public static MatriceElementi matriceElementi;
 	public static Scontro scontro;
@@ -27,32 +27,29 @@ public class TamaMain {
 	
 	public static void main(String[] args) {
 		System.out.println(TITOLO);
-		
-		do {
-			if(richiestaElementi()) break;
-			System.out.println(DATO_NON_VALIDO);
-		} while(true);
-		pietre = new SaccaPietre();
-		setup();
-		boolean continua = true, prima = true;
+		boolean continua = true;
 		while(continua) {
-			if(!prima) {
-				do {
-					if(richiestaElementi()) break;
-					System.out.println(DATO_NON_VALIDO);
-				} while(true);
-				pietre = new SaccaPietre();
-			}else {
-				prima = false;
-			}
-			scontro = new Scontro(new Giocatore(),new Giocatore(),matriceElementi);
+			System.out.print("Giocatore 1 come ti chiami? ");
+			Giocatore giocatore1 = new Giocatore(sc.nextLine());
+			System.out.print("E tu Giocatore 2 come ti chiami? ");
+			Giocatore giocatore2 = new Giocatore(sc.nextLine());
+			if(giocatore1.getNome().equals(giocatore2.getNome())) giocatore2.nomeGiaEsistente();
+			do {
+				if(richiestaElementi()) break;
+				System.out.println(DATO_NON_VALIDO);
+			} while(true);
+			pietre = new SaccaPietre();
+			matriceElementi = new MatriceElementi();
+			System.out.println(EQUILIBRIO_STABILITO);
+			scontro = new Scontro(giocatore1,giocatore2,matriceElementi);
 			scontro.getG1().assegnaGolem();
 			scontro.getG1().setGolemAttivo();
 			scontro.getG2().assegnaGolem();
 			scontro.getG2().setGolemAttivo();
 			
-			System.out.println("-------------");
+			barra();
 			System.out.println("Ogni giocatore avrà a disposizione "+ scontro.getG1().numGolem()+" golem");
+			barra();
 			int x = -1;
 			while(x!= 1 && x!=2) {//se x == 1 allora ha vinto il giocatore 1 altrimenti il 2
 				x = -1;
@@ -60,12 +57,12 @@ public class TamaMain {
 					x = 0;
 					while(true) {
 						if(scontro.getG1().getGolemAttivo().numPietre()==0) {
-							System.out.println("\n\n\nGiocatore 1: assegna le pietre al tuo golem");
+							System.out.println("\n"+ giocatore1.getNome() +" assegna le pietre al tuo golem ");
 							assegnaPietre(scontro.getG1().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
 						}
 						boolean uguali = true;
 						if(scontro.getG2().getGolemAttivo().numPietre()==0){
-							System.out.println("\n\n\nGiocatore 2: assegna le pietre al tuo golem");
+							System.out.println("\n"+ giocatore2.getNome() + " assegna le pietre al tuo golem ");
 							assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
 						}
 						
@@ -98,10 +95,10 @@ public class TamaMain {
         	   		}
 					x = scontro.letThemFight();
 					if(x == 1) {
-						System.out.println("IL VINCITORE E' IL GIOCATORE 1");
+						System.out.println("Ha vinto "+ giocatore1.getNome());
 						break;
 					}else if(x == 2) {
-						System.out.println("IL VINCITORE E' IL GIOCATORE 2");
+						System.out.println("Ha vinto "+ giocatore2.getNome());
 					}else {
 						x = -1;
 					}
@@ -112,6 +109,7 @@ public class TamaMain {
 			continua = ricomincia();
 		}
 		sc.close();
+		System.out.println("GRAZIE PER AVER GIOCATO");
 	}
 	
 	/**
@@ -133,14 +131,6 @@ public class TamaMain {
 			} else return false;
 		}
 		return true;
-	}
-	
-	/**
-	 * Inizializza la matrice delle forze
-	 * */
-	public static void setup() {
-		matriceElementi = new MatriceElementi();
-		System.out.println(EQUILIBRIO_STABILITO);
 	}
 	
 	
@@ -178,11 +168,13 @@ public class TamaMain {
 				}
 			}
 			if(!assegnata) {
-				System.out.println(DATO_NON_VALIDO + "\n\n\n\n\n");
+				System.out.println(DATO_NON_VALIDO + "\n");
 			} else numPietre--;
 			
 			
 		} while(numPietre>0);
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		barra();
 	}
 	
 	/**
@@ -194,6 +186,7 @@ public class TamaMain {
         do {
             System.out.print(VUOI_CONTINUARE);
             String risp = sc.nextLine();
+            barra();
             if(risp.equalsIgnoreCase("si") || risp.equalsIgnoreCase("sì")) return true;
             else if(risp.equalsIgnoreCase("no")) return false;
             else System.out.println(DATO_NON_VALIDO);
@@ -261,6 +254,10 @@ public class TamaMain {
         System.out.println("\n\n");
 	}
 	
+	public static void barra() {
+		System.out.println("--------------------------------------------------------------------------");
+	}
+	
 	private static final String TITOLO = "\n" + 
 			"████████╗ █████╗ ███╗   ███╗ █████╗  ██████╗  ██████╗ ██╗     ███████╗███╗   ███╗\n" + 
 			"╚══██╔══╝██╔══██╗████╗ ████║██╔══██╗██╔════╝ ██╔═══██╗██║     ██╔════╝████╗ ████║\n" + 
@@ -268,6 +265,9 @@ public class TamaMain {
 			"   ██║   ██╔══██║██║╚██╔╝██║██╔══██║██║   ██║██║   ██║██║     ██╔══╝  ██║╚██╔╝██║\n" + 
 			"   ██║   ██║  ██║██║ ╚═╝ ██║██║  ██║╚██████╔╝╚██████╔╝███████╗███████╗██║ ╚═╝ ██║\n" + 
 			"   ╚═╝   ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚═╝     ╚═╝\n" + 
-			"                                                                                 \n" + 
-			"";
+			"   ___  _   _    ____ ____ ___  _ ____ ____    _  _ _  _ ____ _  _ _   _ \n" + 
+			"   |__]  \\_/     |    |  | |  \\ | |    |___    |__| |  | [__  |_/   \\_/  \n" + 
+			"   |__]   |      |___ |__| |__/ | |___ |___    |  | |__| ___] | \\_   |   \n" + 
+			"__________________________________________________________________________________ \n" + 
+			"                                                                      \n";
 }

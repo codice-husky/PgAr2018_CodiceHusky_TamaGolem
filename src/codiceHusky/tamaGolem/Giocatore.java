@@ -6,9 +6,19 @@ public class Giocatore {
 	
 	private ArrayList<TamaGolem> squadra;
 	private TamaGolem golemAttivo;
+	private String nome;
 	
-	public Giocatore() {
+	public Giocatore(String nome) {
 		squadra = new ArrayList<TamaGolem>();
+		this.nome=nome;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+	
+	public void nomeGiaEsistente() {
+		this.nome = nome+  "2";
 	}
 
 	public void aggiungiGolem(TamaGolem golem) {
