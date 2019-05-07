@@ -61,12 +61,12 @@ public class TamaMain {
 					x = 0;
 					while(true) {
 						if(scontro.getG1().getGolemAttivo().numPietre()==0) {
-							System.out.println("Giocatore 1: assegna le pietre al tuo golem");
+							System.out.println("\n\n\nGiocatore 1: assegna le pietre al tuo golem");
 							assegnaPietre(scontro.getG1().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
 						}
 						boolean uguali = true;
 						if(scontro.getG2().getGolemAttivo().numPietre()==0){
-							System.out.println("Giocatore 2: assegna le pietre al tuo golem");
+							System.out.println("\n\n\nGiocatore 2: assegna le pietre al tuo golem");
 							assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
 						}
 						
@@ -152,29 +152,37 @@ public class TamaMain {
 	 */
 	public static void assegnaPietre(TamaGolem golem, int numPietre) {
 		do {
+			boolean assegnata = false;
 			System.out.println(PIETRE_DA_ASSEGNARE + numPietre);
 			System.out.println(PIETRE_DISPONIBILI + pietre.pietreToString());
 			System.out.print(RICHIESTA_PIETRE_DA_ASSEGNARE);
 			String input = sc.nextLine();
 			
 			if(input.length() == 1) {
-				for(int i=0; i<ELEMENTI_ABBR.length; i++) {
+				for(int i=0; i<elemUtilizzati; i++) {
 					String abbr = ELEMENTI_ABBR[i];
 					if(abbr.equalsIgnoreCase(Character.toString(input.charAt(0)))) {
 						input = ELEMENTI_PIETRE[i];
 						golem.assegnaPietra(pietre.estraiPietraDef(input));
+						assegnata = true;
 						break;
 					}
 				}
+				
 			} else {
 				for(String elemDaSacca : pietre) {
 					if(elemDaSacca.equalsIgnoreCase(input)) {
 						golem.assegnaPietra(pietre.estraiPietraDef(input));
+						assegnata = true;
 						break;
 					}
 				}
 			}
-			numPietre--;
+			if(!assegnata) {
+				System.out.println(DATO_NON_VALIDO + "\n\n\n\n\n");
+			} else numPietre--;
+			
+			
 		} while(numPietre>0);
 	}
 	
