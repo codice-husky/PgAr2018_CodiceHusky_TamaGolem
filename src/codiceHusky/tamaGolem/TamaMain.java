@@ -27,7 +27,7 @@ public class TamaMain {
 	private static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		System.out.println("---TAMAGOLEM CODICE HUSKY---");
+		System.out.println(TITOLO);
 		
 		do {
 			if(richiestaElementi()) break;
@@ -261,4 +261,14 @@ public class TamaMain {
         }
         System.out.println("\n\n");
 	}
+	
+	private static final String TITOLO = "\n" + 
+			"████████╗ █████╗ ███╗   ███╗ █████╗  ██████╗  ██████╗ ██╗     ███████╗███╗   ███╗\n" + 
+			"╚══██╔══╝██╔══██╗████╗ ████║██╔══██╗██╔════╝ ██╔═══██╗██║     ██╔════╝████╗ ████║\n" + 
+			"   ██║   ███████║██╔████╔██║███████║██║  ███╗██║   ██║██║     █████╗  ██╔████╔██║\n" + 
+			"   ██║   ██╔══██║██║╚██╔╝██║██╔══██║██║   ██║██║   ██║██║     ██╔══╝  ██║╚██╔╝██║\n" + 
+			"   ██║   ██║  ██║██║ ╚═╝ ██║██║  ██║╚██████╔╝╚██████╔╝███████╗███████╗██║ ╚═╝ ██║\n" + 
+			"   ╚═╝   ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝╚═╝     ╚═╝\n" + 
+			"                                                                                 \n" + 
+			"";
 }
