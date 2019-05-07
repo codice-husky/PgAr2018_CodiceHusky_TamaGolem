@@ -64,7 +64,7 @@ public class MatriceElementi {
                 }
             }
         }
- 
+        
         for(int i=0;i<GRAND-2;i++){
             int sommaRiga = 0, sommaColonna = 0;
             /*conto quanti danni applicano gli 
@@ -79,6 +79,7 @@ public class MatriceElementi {
             }
             /*stessa cosa con i danni in quella colonna prima dell'elemento*/
             for(int j=i+1;j<GRAND-1;j++){
+                sommaColonna = 0;
                 for(int s = 0;s<GRAND;s++){
                     if(matr[s][j]!=null) sommaColonna+=matr[s][j];
                     else break;
@@ -88,7 +89,7 @@ public class MatriceElementi {
                  * compreso tra 1 e la vita del golem*/
                 while(!errore){
                     errore = true;
-                    int valore = (int)((Math.random()*V)+1);
+                    int valore = (int)((Math.random()*V));
                     int isPos = (int)Math.round(Math.random());
                     /*serve per capire se da/riceve danno
                     e associa ad esempio ad [1][2] danno 5 e a
@@ -96,15 +97,19 @@ public class MatriceElementi {
                     */
                     if(isPos == 0) valore = -valore;
                     if(valore!=(-sommaRiga) &&
-                    		valore!= (-sommaColonna)&&
-                    		(sommaRiga+valore <=10)&&
-                    		(sommaRiga+valore >=(-10))){
+                    		valore != (-sommaColonna)&&
+                                ((sommaRiga+valore) != (-sommaColonna))&&
+                    		((sommaRiga+valore) <=V)&&
+                    		((sommaRiga+valore) >=(-V))&&
+                                ((sommaColonna+valore) <(V))&&
+                                ((sommaColonna+valore) >(-V))){
                         matr[i][j] = valore;
                         matr[j][i]=-valore;
                         sommaRiga+=valore;
                     }else{
                         errore = false;
                     }
+                    
                     
                 }
             }/*aggiunge l'ultimo elemento della riga, che è l'opposto
@@ -185,6 +190,7 @@ public class MatriceElementi {
                             differenza++;
                             memo = new ArrayList<>(elementi);
                         }
+                        
                     }                
                 }
             }
