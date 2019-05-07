@@ -37,6 +37,7 @@ public class Scontro {
 						if(g2.numGolem()>0)
 							g2.setGolemAttivo(); 
 						else return 1; //vince LA PARTITA il player 1
+						return 0;
 					}
 				}else if(m.matrice[p1][p2]==0) {
 					System.out.println("Le pietre dei 2 golem sono uguali");
@@ -50,6 +51,7 @@ public class Scontro {
 						if(g1.numGolem()>0)
 							g1.setGolemAttivo(); 
 						else return 2; //vince LA PARTITA il player 2
+						return 0;
 					}
 				}
 				t1.cicla();
