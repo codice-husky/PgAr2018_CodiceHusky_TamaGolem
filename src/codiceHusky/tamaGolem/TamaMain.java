@@ -18,7 +18,6 @@ public class TamaMain {
 	public static final String[] ELEMENTI_PIETRE = {"Acqua", "Aria", "Fuoco", "Terra", "Torta", "Fagiolo", "Budino", "Pianta", "Sale", "Pepe"};
 	public static final String[] ELEMENTI_ABBR = {"Q", "A", "F", "T", "O", "L", "B", "I", "S", "P"};
 	public static int elemUtilizzati;
-	private static final String ELEMENTI_SELEZIONATI_RANDOM = "Sono stati selezionati " + elemUtilizzati + " elementi";
 	public static MatriceElementi matriceElementi;
 	public static Scontro scontro;
 	
@@ -130,7 +129,7 @@ public class TamaMain {
 		} else {
 			if(inputStr.equalsIgnoreCase("R")) {
 				elemUtilizzati = (int)Math.round((Math.random()*(10-ELEM_MIN))+ELEM_MIN);
-				System.out.println(ELEMENTI_SELEZIONATI_RANDOM);
+				System.out.println("Sono stati selezionati " + elemUtilizzati + " elementi");
 			} else return false;
 		}
 		return true;
