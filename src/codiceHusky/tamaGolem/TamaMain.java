@@ -60,7 +60,6 @@ public class TamaMain {
 				while(x== -1) {
 					x = 0;
 					while(true) {
-						System.out.println("Numero di pietre: "+scontro.getG1().getGolemAttivo().numPietre());
 						if(scontro.getG1().getGolemAttivo().numPietre()==0) {
 							System.out.println("Giocatore 1: assegna le pietre al tuo golem");
 							assegnaPietre(scontro.getG1().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
@@ -71,18 +70,26 @@ public class TamaMain {
 							assegnaPietre(scontro.getG2().getGolemAttivo(), (int) (Math.ceil((elemUtilizzati + 1)/3) + 1));
 						}
 						
-            	   		uguali = controlloValori();
+						int nPietre =(int) (Math.ceil((elemUtilizzati + 1)/3) + 1);
+            	   		for(int p = 0;p<nPietre;p++) {
+            	   			if(scontro.getG1().getGolemAttivo().getPietre().get(p) != 
+            	   			   scontro.getG2().getGolemAttivo().getPietre().get(p)) {
+            	   				uguali = false;
+            	   				break;
+            	   			}
+	               		}
             	   		if(uguali) {
             	   			System.out.println("I 2 giocatori hanno scelto le stesse pietre.\n"
             	   					+ "Bisogna riscieglierle");
             	   			ArrayList<String>pietreDaRimettere = new ArrayList<String>();
-            	   			for(int w = 0;w<scontro.getG1().getGolemAttivo().numPietre();w++) {
-            	   				pietreDaRimettere.add(scontro.getG1().getGolemAttivo().getPietre().get(w));
-            	   				pietreDaRimettere.add(scontro.getG2().getGolemAttivo().getPietre().get(w));
-            	   				scontro.getG1().getGolemAttivo().getPietre().remove(scontro.getG1().getGolemAttivo().getPietre().get(w));
-            	   				scontro.getG2().getGolemAttivo().getPietre().remove(scontro.getG2().getGolemAttivo().getPietre().get(w));
+            	   			int memo = scontro.getG1().getGolemAttivo().numPietre();
+            	   			for(int w = 0;w<memo;w++) {
+            	   				pietreDaRimettere.add(scontro.getG1().getGolemAttivo().getPietre().get(0));
+            	   				pietreDaRimettere.add(scontro.getG2().getGolemAttivo().getPietre().get(0));
+            	   				scontro.getG1().getGolemAttivo().getPietre().remove(0);
+            	   				scontro.getG2().getGolemAttivo().getPietre().remove(0);
             	   			}
-            	   			System.out.println(scontro.getG1().getGolemAttivo().numPietre());
+            	   			System.out.println("pietre: "+scontro.getG1().getGolemAttivo().numPietre());
             	   			String[] def = new String[pietreDaRimettere.size()];
             	   			def = pietreDaRimettere.toArray(def);
             	   			pietre.reinserisci(def);
@@ -169,18 +176,6 @@ public class TamaMain {
 			}
 			numPietre--;
 		} while(numPietre>0);
-	}
-	
-	public static boolean controlloValori() {
-		int nPietre =(int) (Math.ceil((elemUtilizzati + 1)/3) + 1);
-		System.out.println(nPietre);
-		for(int p = 0;p<nPietre;p++) {
-   			if(!(scontro.getG1().getGolemAttivo().getPietre().get(p).equals( 
-   			   scontro.getG2().getGolemAttivo().getPietre().get(p)))) {
-   				return false;
-   			}
-   		}
-		return true;
 	}
 	
 	/**
