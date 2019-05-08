@@ -94,10 +94,10 @@ public class TamaMain {
         	   		}
 					x = scontro.letThemFight();
 					if(x == 1) {
-						System.out.println("Ha vinto "+ giocatore1.getNome());
+						System.out.println("\nHa vinto "+ giocatore1.getNome());
 						break;
 					}else if(x == 2) {
-						System.out.println("Ha vinto "+ giocatore2.getNome());
+						System.out.println("\nHa vinto "+ giocatore2.getNome());
 					}else {
 						x = -1;
 					}
