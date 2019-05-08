@@ -176,7 +176,7 @@ public class TamaMain {
 			
 			
 		} while(numPietre>0);
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n NON SPIARE!!!");//per non far vedere all'avversario le pietre scelte
 		barra();
 	}
 	
