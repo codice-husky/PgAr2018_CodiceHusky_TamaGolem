@@ -85,7 +85,6 @@ public class TamaMain {
             	   				scontro.getG1().getGolemAttivo().getPietre().remove(0);
             	   				scontro.getG2().getGolemAttivo().getPietre().remove(0);
             	   			}
-            	   			System.out.println("pietre: "+scontro.getG1().getGolemAttivo().numPietre());
             	   			String[] def = new String[pietreDaRimettere.size()];
             	   			def = pietreDaRimettere.toArray(def);
             	   			pietre.reinserisci(def);
@@ -143,7 +142,7 @@ public class TamaMain {
 		do {
 			boolean assegnata = false;
 			System.out.println(PIETRE_DA_ASSEGNARE + numPietre);
-			System.out.println(PIETRE_DISPONIBILI + pietre.pietreToString());
+			System.out.print(PIETRE_DISPONIBILI + pietre.pietreToString());
 			System.out.print(RICHIESTA_PIETRE_DA_ASSEGNARE);
 			String input = sc.nextLine();
 			
@@ -194,13 +193,14 @@ public class TamaMain {
 	}
 	
 	public static void visualizzaEquilibrio() {
+
         int maxLength =3;
-        for(int i = 0;i < ELEMENTI_PIETRE.length; i++){
+        for(int i = 0;i < elemUtilizzati; i++){
             if(ELEMENTI_PIETRE[i].length() > maxLength){
                 maxLength = ELEMENTI_PIETRE[i].length();
             }
         }
-        for(int i=-1;i<ELEMENTI_PIETRE.length;i++){
+        for(int i=-1;i<elemUtilizzati;i++){
             if(i == -1){
                 System.out.print("|");
                 for(int j=0;j<maxLength;j++){
@@ -221,8 +221,8 @@ public class TamaMain {
             }
         }
         System.out.println("");
-        for(int i=0;i<ELEMENTI_PIETRE.length;i++){
-           for(int j=-1;j<ELEMENTI_PIETRE.length;j++){
+        for(int i=0;i<elemUtilizzati;i++){
+           for(int j=-1;j<elemUtilizzati;j++){
                 if(j== -1){
                     System.out.print("|");
                     int spazi = maxLength - ELEMENTI_PIETRE[i].length();
@@ -236,7 +236,7 @@ public class TamaMain {
                     }
                     System.out.print("|");
                 }else{
-                    String memo = ""+matriceElementi.getMatrice()[i][j];
+                    String memo = "" + matriceElementi.getMatrice()[i][j];
                     int spazi = maxLength - memo.length();
                     int dopo = spazi / 2, prima = spazi - dopo;
                     for(int k = 0;k < prima; k++){
