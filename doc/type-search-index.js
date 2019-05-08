@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"codiceHusky.tamaGolem","l":"Giocatore"},{"p":"codiceHusky.tamaGolem","l":"MatriceElementi"},{"p":"codiceHusky.tamaGolem","l":"SaccaPietre"},{"p":"codiceHusky.tamaGolem","l":"Scontro"},{"p":"codiceHusky.tamaGolem","l":"TamaGolem"},{"p":"codiceHusky.tamaGolem","l":"TamaMain"}]
