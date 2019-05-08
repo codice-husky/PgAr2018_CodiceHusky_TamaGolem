@@ -151,7 +151,9 @@ public class TamaMain {
 					String abbr = ELEMENTI_ABBR[i];
 					if(abbr.equalsIgnoreCase(Character.toString(input.charAt(0)))) {
 						input = ELEMENTI_PIETRE[i];
-						golem.assegnaPietra(pietre.estraiPietraDef(input));
+						String pietraDef = pietre.estraiPietraDef(input);
+						if(pietraDef == null) break;
+						golem.assegnaPietra(pietraDef);
 						assegnata = true;
 						break;
 					}
@@ -160,7 +162,9 @@ public class TamaMain {
 			} else {
 				for(String elemDaSacca : pietre) {
 					if(elemDaSacca.equalsIgnoreCase(input)) {
-						golem.assegnaPietra(pietre.estraiPietraDef(input));
+						String pietraDef = pietre.estraiPietraDef(input);
+						if(pietraDef == null) break;
+						golem.assegnaPietra(pietraDef);
 						assegnata = true;
 						break;
 					}
