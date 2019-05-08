@@ -11,11 +11,14 @@ import java.util.ArrayList;
  * con lo stesso indice (al primo giro tutta la colonna con indice 0,e la
  * riga con inidice 0, poi la riga/colonna 1, ecc.),
  * 
+ * QUESTO NON RAPPRESENTA UN ESEMPIO DELLA TABELLA MA DELL'ORDINE
+ * CON CUI VENGONO CREATI GLI ELEMENTI
  * 0 1 1 1 1
  * 1 0 2 2 2
  * 1 2 0 3 3 
  * 1 2 3 0 4
- * 1 2 3 4 0
+ * 1 2 3 4 0 
+ * 
  * 
  * La diagonale e' fissa a 0(fuoco fa danno 0 a fuoco), poi gli altri numeri
  * rappresentano in quale ciclo è stato creato l'elemento (1 il primo ciclo,
@@ -30,14 +33,7 @@ public class MatriceElementi {
 		int vita = TamaMain.VITA_TAMAGOLEM;
 		int elementi = TamaMain.ELEMENTI_PIETRE.length;
 		matrice = creaMatrice(vita,elementi);
-		/*in pratica tutta la matrice è generata con numeri randomici tranne
-			nell'esempio di prima le celle 4, che sono date dalla somma degli
-			elementi dell'ultima colonna (negata per bilanciare) e siccome quel
-			numero deve essere minore della vita del golem cilo con questo while 
-		  */
-		while(matrice[elementi-2][elementi-1]< -vita ||matrice[elementi-2][elementi-1]>vita) {
-			matrice = creaMatrice(vita,elementi);
-		}
+		
 	}
 	/**
 	 * Getter della matrice
@@ -91,11 +87,13 @@ public class MatriceElementi {
                     errore = true;
                     int valore = (int)((Math.random()*V));
                     int isPos = (int)Math.round(Math.random());
-                    /*serve per capire se da/riceve danno
+                    /*serve per capire se da/riceve danno (0 = x riceve danno
+                      5 a y, 1 = x fa danno 5 da y
                     e associa ad esempio ad [1][2] danno 5 e a
                     [2][1] -5 poiché sono opposti
                     */
                     if(isPos == 0) valore = -valore;
+                    /*serie di controlli per evitare problemi con i numeri*/
                     if(valore!=(-sommaRiga) &&
                     		valore != 0 &&
                     		valore != (-sommaColonna)&&
@@ -110,8 +108,6 @@ public class MatriceElementi {
                     }else{
                         errore = false;
                     }
-                    
-                    
                 }
             }/*aggiunge l'ultimo elemento della riga, che è l'opposto
                della somma dei precedenti e l'ultimo elemento della colonna*/
@@ -126,12 +122,18 @@ public class MatriceElementi {
         }
         matr[GRAND-2][GRAND-1] = -last;
         matr[GRAND-1][GRAND-2] = last;
+        //controllo sugli ultimi valori che potrebbero essere non validi
+        //dato che non sono randomici ma dati da una somma
         if(matr[GRAND-2][GRAND-1]<-V || matr[GRAND-2][GRAND-1]>V){
             ArrayList<Integer> elementi = new ArrayList<Integer>();
             for(int k = 0;k<(GRAND-2);k++){
                 elementi.add(matr[GRAND-2][k]);
             }
-            
+            /*in pratica calcolo la differenza tra la vita del golem 
+              e il valore e la redistribuisco tra i vari valori che compongono
+              la penultima tabella(che influisce sui valori finali
+              che compongono la tabella in modo da avere tutti dati 
+              accettabili*/
             if(matr[GRAND-2][GRAND-1]<-V){
                 ArrayList<Integer> memo = new ArrayList<>(elementi);
                 int differenzaTot = matr[GRAND-2][GRAND-1]-(-V);
