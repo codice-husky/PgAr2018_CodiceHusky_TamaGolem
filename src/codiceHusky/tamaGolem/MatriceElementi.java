@@ -97,6 +97,7 @@ public class MatriceElementi {
                     */
                     if(isPos == 0) valore = -valore;
                     if(valore!=(-sommaRiga) &&
+                    		valore != 0 &&
                     		valore != (-sommaColonna)&&
                                 ((sommaRiga+valore) != (-sommaColonna))&&
                     		((sommaRiga+valore) <=V)&&
